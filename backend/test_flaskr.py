@@ -29,11 +29,22 @@ class TriviaTestCase(unittest.TestCase):
     def test_get_questions(self):
         result = self.client().get('/questions')
         data = json.loads(result.data)
-
         self.assertEqual(result.status_code, 200)
         self.assertTrue(data['questions'])
         self.assertEqual(data['success'], True)
 
+    def test_bad_request(self):
+        result = self.client().get('/questions?page=5000')
+        data = json.loads(result.data)
+        self.assertEqual(result.status_code, 400)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message'], 'Error')
+        
+    def test_question_for_delete(self):
+        result = self.client().delete('/questions/100')
+        data = json.loads(result.data)
+        self.assertEqual(result.status_code, 200)
+        self.assertEqual(data["success"], True)
 # Make the tests conveniently executable
 if __name__ == "__main__":
     unittest.main()
