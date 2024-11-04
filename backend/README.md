@@ -78,13 +78,93 @@ One note before you delve into your tasks: for each endpoint, you are expected t
 
 
 ## Review Comment to the Students
-/categories
-/questions
-/questions/<int:question_id>
-/questions
-/questions/search
-/categories/<int:category_id>/questions
-/quizzes
+GET '/categories'
+- Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
+- Request Arguments: None
+- Returns: An object with a single key, categories, that contains a object of id: category_string key:value pairs. 
+{'1' : "Science",
+'2' : "Art",
+'3' : "Geography",
+'4' : "History",
+'5' : "Entertainment",
+'6' : "Sports"}
+POST '/questions'
+- Search question as key
+- Request Arguments: None
+- Returns: A object related to question if it existed.
+POST '/questions/<int:question_id>'
+- Create new question
+- Request Arguments: question id
+- Return: {"created":4,"success":true,"total_questions":21}
+DELETE '/questions/<int:question_id>'
+- Get the question id to delete
+- Request Arguments: question id
+- Returns: A object
+{"deleted":4,"success":true,"total_questions":21}
+POST '/questions/search'
+- Search question as a key
+- Request Arguments: None
+- Returns: A object of question
+
+{
+  "questions": [
+    {
+      "answer": "George Washington Carver", 
+      "category": "4", 
+      "difficulty": 2, 
+      "id": 12, 
+      "question": "Who invented Peanut Butter?"
+    }
+  ], 
+  "success": true, 
+  "total_questions": 3
+}
+GET '/categories/<int:category_id>/questions'
+- Get questions as category id
+- Request Arguments: category id
+- Returns: A object with a list question belong to the category.
+{
+    "current_category": "Geography",
+    "questions": [
+        {
+            "answer": "Lake Victoria",
+            "category": 3,
+            "difficulty": 2,
+            "id": 13,
+            "question": "What is the largest lake in Africa?"
+        },
+        {
+            "answer": "The Palace of Versailles",
+            "category": 3,
+            "difficulty": 3,
+            "id": 14,
+            "question": "In which royal palace would you find the Hall of Mirrors?"
+        },
+        {
+            "answer": "Agra",
+            "category": 3,
+            "difficulty": 2,
+            "id": 15,
+            "question": "The Taj Mahal is located in which Indian city?"
+        }
+    ],
+    "success": true,
+    "total_questions": 3
+}
+POST '/quizzes'
+- Get the question
+- Request Arguments: None
+- Returns: A object question
+{
+    "question": {
+        "answer": "Jackson Pollock",
+        "category": 2,
+        "difficulty": 2,
+        "id": 19,
+        "question": "Which American artist was a pioneer of Abstract Expressionism, and a leading exponent of action painting?"
+    },
+    "success": true
+}
 ```
 This README is missing documentation of your endpoints. Below is an example for your endpoint to get all categories. Please use it as a reference for creating your documentation and resubmit your code. 
 
